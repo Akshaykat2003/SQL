@@ -102,7 +102,7 @@
 (2 rows)
 
 
--- GRANT SELECT, INSERT ON departments TO reporting_user;
+-- GRANT SELECT, INSERT ON departments TO reporting_user
                                                Access privileges
  Schema |             Name              |   Type   |     Access privileges      | Column privileges | Policies 
 --------+-------------------------------+----------+----------------------------+-------------------+----------
