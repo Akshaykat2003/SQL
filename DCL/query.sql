@@ -119,7 +119,7 @@
 
 
 
---   REVOKE ALL PRIVILEGES ON departments FROM app_user;
+-- REVOKE ALL PRIVILEGES ON departments FROM app_user;
  
 
                                                Access privileges
