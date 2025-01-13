@@ -17,6 +17,7 @@ Indexes:
 -- ('Armaan', 'Jain', 55000),
 -- ('sarvit', 'chauhan', 30000);
 
+
  employee_id | first_name | last_name | salary 
 -------------+------------+-----------+--------
            4 | akshay     | katoch    |  50000
