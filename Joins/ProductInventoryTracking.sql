@@ -1,42 +1,63 @@
- product_id |    name    | price  
-------------+------------+--------
-          1 | Laptop     | 999.99
-          2 | Smartphone | 499.99
-          3 | Tablet     | 299.99
-          4 | Headphones |  89.99
-(4 rows)
 
- 
- inventory_id | product_id | warehouse_id | quantity 
---------------+------------+--------------+----------
-            1 |          1 |            1 |       50
-            2 |          2 |            2 |      100
-            3 |          3 |            1 |       75
-            4 |          4 |            3 |      200
-(4 rows)
+Query: SELECT 
+     c.customer_id,
+     c.first_name,
+     t.transaction_id,
+     t.transaction_date,
+     t.transaction_type,
+     t.amount,
+     a.account_type,
+     a.balance
+ FROM 
+     customers c
+ INNER JOIN 
+     accounts a
+ ON 
+     c.customer_id = a.customer_id
+ INNER JOIN 
+     transactions t
+ ON 
+     a.account_id = t.account_id
+ WHERE 
+     t.amount > 10000
+     t.transaction_date IN (
+         SELECT 
+             t1.transaction_date
+         FROM 
+             transactions t1
+         INNER JOIN 
+             transactions t2
+         ON 
+             t1.account_id = t2.account_id
+         WHERE 
+             t1.transaction_id <> t2.transaction_id
+             AND ABS(EXTRACT(EPOCH FROM (t1.transaction_date - t2.transaction_date))) < 300 -- Transactions within 5 minutes
+     )
+     OR 
+     c.customer_id IN (
+         SELECT 
+             c2.customer_id
+         FROM 
+             customers c2
+         INNER JOIN 
+             accounts a2
+         ON 
+             c2.customer_id = a2.customer_id
+         INNER JOIN 
+             transactions t3
+         ON 
+             a2.account_id = t3.account_id
+         GROUP BY 
+             c2.customer_id
+         HAVING 
+             COUNT(t3.transaction_id) > 10
+     )
+ ORDER BY 
+     t.transaction_date DESC, t.amount DESC;
 
-
-
-warehouse_id |   warehouse_name    |         location          
---------------+---------------------+---------------------------
-            1 | Main Warehouse      | Sector 23, Main st, Delhi
-            2 | East Side Warehouse | 456 East St, Mumbai
-            3 | West Side Warehouse | 764 west, Kolkata
-            4 | North Warehouse     | sector 125 Mohali, Punjab
-(4 rows)
-
-
-
--- Q2  Determine which products are not currently stocked in any warehouse.
-
- product_id |      name      
-------------+----------------
-          5 | Wireless Mouse
+Output:
+ customer_id | first_name | transaction_id |  transaction_date   | transaction_type |  amount  | account_type | balance 
+-------------+------------+----------------+---------------------+------------------+----------+--------------+---------
+           2 | akshay     |              4 | 2025-01-12 12:00:00 | debit            | 19500.00 | Checking     | 3000.00
 (1 row)
-
-
--- SELECT p.product_id, p.name 
--- FROM products p
--- LEFT JOIN inventories i ON p.product_id = i.product_id
--- WHERE i.product_id IS NULL;
 
