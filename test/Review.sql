@@ -72,11 +72,11 @@ select * from books;
        5 | Book E | Author E | 2025-01-08       | Action
 (5 rows)
 
-insert into members(name,address,contact_number)values('Aryan','Ludhiana',7087077809);
+insert into members(name,address,contact_number)values('Akshay','Ludhiana',7087077809);
 INSERT 0 1
-insert into members(name,address,contact_number)values('Aalekh','Una',7087067809);
+insert into members(name,address,contact_number)values('rahul','Una',7087067809);
 INSERT 0 1
-insert into members(name,address,contact_number)values('Aman','HP',8487067809);
+insert into members(name,address,contact_number)values('Akhil','HP',8487067809);
 INSERT 0 1
 insert into members(name,address,contact_number)values('Ayush','GJ',7287067809);
 INSERT 0 1
@@ -86,9 +86,9 @@ INSERT 0 1
 select * from members;
  member_id |  name  | address  | contact_number
 -----------+--------+----------+----------------
-         1 | Aryan  | Ludhiana |     7087077809
-         2 | Aalekh | Una      |     7087067809
-         3 | Aman   | HP       |     8487067809
+         1 | Akshay | Ludhiana |     7087077809
+         2 | rahul  | Una      |     7087067809
+         3 | akhil  | HP       |     8487067809
          4 | Ayush  | GJ       |     7287067809
          5 | Agrim  | JK       |     9887067809
 (5 rows)
@@ -128,8 +128,8 @@ select m.name,b.title from borrowings bo inner join members m on bo.member_id = 
 book_id = 1;
 name  | title
 --------+--------
- Aryan  | Book A
- Aalekh | Book A
+ Akshay  | Book A
+ rahul   | Book A
 (2 rows)
 
 Q3
@@ -144,8 +144,8 @@ Q4
 select m.name, count(book_id) from members m inner join borrowings bo on m.member_id = bo.member_id group by m.name;
   name  | count
 --------+-------
- Aalekh |     1
- Aryan  |     1
+ rahul |     1
+ Akshay  |     1
  Ayush  |     1
  Agrim  |     2
 (4 rows)
@@ -182,9 +182,9 @@ BEGIN
 select * from members;
  member_id |  name  | address  | contact_number
 -----------+--------+----------+----------------
-         1 | Aryan  | Ludhiana |     7087077809
-         2 | Aalekh | Una      |     7087067809
-         3 | Aman   | HP       |     8487067809
+         1 | akshay | Ludhiana |     7087077809
+         2 | rahul | Una      |     7087067809
+         3 | Akhil   | HP       |     8487067809
          4 | Ayush  | GJ       |     7287067809
          5 | Agrim  | JK       |     9887067809
 (5 rows)
@@ -195,12 +195,12 @@ COMMIT
 select * from members;
  member_id |  name  | address  | contact_number
 -----------+--------+----------+----------------
-         1 | Aryan  | Ludhiana |     7087077809
-         2 | Aalekh | Una      |     7087067809
-         3 | Aman   | HP       |     8487067809
-         4 | Ayush  | GJ       |     7287067809
-         5 | Agrim  | JK       |     9887067809
-         6 | Aalu   | UP       |     7087088765
+         1 | akshay  | Ludhiana |     7087077809
+         2 | rahul   | Una      |     7087067809
+         3 | Akhil   | HP       |     8487067809
+         4 | Ayush   | GJ       |     7287067809
+         5 | Agrim   | JK       |     9887067809
+         6 | Aalu    | UP       |     7087088765
 (6 rows)
 
 `JOINS`
@@ -209,9 +209,9 @@ select m.name,b.title,bo.borrow_date from borrowings bo inner join members m on 
 ok_id;
   name  | title  | borrow_date
 --------+--------+-------------
- Aryan  | Book A | 2026-01-01
- Aalekh | Book A | 2026-01-02
- Agrim  | Book B | 2026-01-05
+ Akshay | Book A | 2026-01-01
+ rahul  | Book A | 2026-01-02
+ Akhil  | Book B | 2026-01-05
  Ayush  | Book C | 2026-01-10
  Agrim  | Book D | 2026-01-10
 (5 rows)
