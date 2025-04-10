@@ -36,7 +36,6 @@ values
          4 | Python          |       5
 (4 rows)
 
-
 insert into enrollments(student_id , course_id , grade) 
 values
  student_id | course_id | grade 
